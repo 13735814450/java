@@ -1,0 +1,81 @@
+spring:
+  application:
+    name: zuul-server
+  profile: ${PROFILE}
+  cloud:
+    config:
+      profile: ${spring.profile}
+      discovery:
+        enabled: true
+        serviceId: config-server
+      name: ${spring.application.name}
+      label: master
+server:
+  port: 8006
+eureka:
+  instance:
+    hostname: ${SERVER_HOSTNAME}
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_URL}:${EUREKA_PORT}/eureka/
+
+#spring:
+#  application:
+#    name: zuul-server
+#  profile: dev
+#  cloud:
+#    config:
+#      profile: ${spring.profile}
+#      discovery:
+#        enabled: true
+#        serviceId: config-server
+#      name: ${spring.application.name}
+#      label: master
+##  redis:
+##    database: 0
+##    host: 61.174.254.22
+##    port: 6378
+##    password: lindj
+##    timeout: 100
+#server:
+#  port: 8006
+#eureka:
+#  instance:
+#    hostname: 192.168.1.172
+#    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:8000/eureka/
+#redisson:
+#  mode: single
+#  enable: true
+#  # 连接超时 毫秒
+#  connectTimeout: 10000
+#  # 命令等待超时
+#  timeout: 3000
+#  password: lindj
+#  # 客户端名称
+#  clientName: ${spring.application.name}
+#  # 主节点连接池大小
+#  masterConnectionPoolSize: 64
+#  # 主节点最小空闲连接数
+#  masterConnectionMinimumIdleSize: 32
+#  # 连接空闲超时
+#  idleConnectionTimeout: 10000
+#  # 重新连接时间间隔
+#  reconnectionTimeout: 3000
+#  # 从节点连接池大小
+#  slaveConnectionPoolSize: 64
+#  # 从节点最小空闲连接数
+#  slaveConnectionMinimumIdleSize: 32
+#  sentinelAddresses:
+#    - "redis://61.174.254.22:26379"
+#    - "redis://61.174.254.22:26378"
+#    - "redis://61.174.254.22:26377"
+#  address: "redis://61.174.254.22:6378"
+#  database: 0
+#  masterName: lindj-master
+
+
+

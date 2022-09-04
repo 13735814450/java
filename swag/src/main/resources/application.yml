@@ -1,0 +1,8 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /swag
+swagger:
+  ui-config:
+    operations-sorter: method
+

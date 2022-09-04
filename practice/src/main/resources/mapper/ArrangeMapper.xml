@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.box.dao.ArrangeDao">
+
+    <resultMap id="baseRsp" type="com.box.vo.rsp.ArrangeRsp">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="task_id" property="taskId" jdbcType="INTEGER"/>
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER"/>
+      </resultMap>
+
+    <sql id="baseField">
+        task_id,employee_id,create_at,update_at
+    </sql>
+    <insert id="add" parameterType="com.box.vo.req.ArrangeReq" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_arrange (<include refid="baseField"/>)
+        VALUES (#{taskId}, #{employeeId},NOW(),NOW())
+    </insert>
+</mapper>

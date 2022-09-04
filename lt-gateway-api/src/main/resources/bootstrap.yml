@@ -1,0 +1,49 @@
+server:
+  port: ${GATEWAY_API_PORT:20000}
+spring:
+  profiles:
+    active: @profile.active@
+  application:
+    name: @artifactId@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:47.97.230.127:18848}
+        namespace: ${NACOS_NAMESPACE_ID:3bda1eae-0bb1-4921-bd70-b68998dbbe49}
+        group: DEFAULT_GROUP
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:47.97.230.127:18848}
+        file-extension: yml
+        namespace: ${NACOS_NAMESPACE_ID:3bda1eae-0bb1-4921-bd70-b68998dbbe49}
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          predicates:
+            - name: Path
+              args:
+                pattern: "'/'+serviceId+'/**'"
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "'/' + serviceId + '/(?<remaining>.*)'"
+                replacement: "'/${remaining}'"
+      httpclient:
+        connect-timeout: ${GATEWAY_CONNECT_TIMEOUT:3000}
+        response-timeout: ${GATEWAY_RESPONSE_TIMEOUT:10s}
+dubbo:
+  registry:
+    address: nacos://${NACOS_SERVER_ADDR:47.97.230.127:18848}
+    parameters[namespace]: ${DUBBO_NACOS_NAMESPACE_ID:3bda1eae-0bb1-4921-bd70-b68998dbbe49}
+  protocol:
+    name: dubbo
+    port: -1
+  cloud:
+    #要订阅其他服务，如果没有，则填写当前服务
+    subscribed-services: lt-gateway-server,lt-admin-server
+  consumer:
+    check: false
+    timeout: 6000

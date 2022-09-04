@@ -1,0 +1,39 @@
+# service config
+server:
+  port: 8080
+  servlet:
+    context-path: /practice
+# spring config
+spring:
+  freemarker:
+    cache: false
+    request-context-attribute: request
+  # default evn
+  profiles:
+    active: dev
+  datasource:
+    # default database config
+    url: jdbc:mysql://${database-host}:${database-port}/${database-schema}?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: ${database-username}
+    password: ${database-password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+# mybatis config
+mybatis:
+  type-aliases-package: com.box.vo
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+swagger:
+  ui-config:
+    operations-sorter: method

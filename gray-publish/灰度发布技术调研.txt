@@ -1,0 +1,116 @@
+docker run -d --name nginx --network host  -v /home/front/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/front/html:/home/front/html -v /home/front/htm:/home/front/htm -ti nginx:1.17.3 
+固定IP
+集团： 115.236.83.74
+数理： 183.129.192.242
+183.129.192.242;115.236.83.74;192.168.1.172
+问题： f5刷新，老是404
+办法：把root移到location外面
+  set $root_dir /home/front/pi;
+ 	       set $root_dir /home/front/pigray;
+               #include /home/front/conf/gray.conf;
+               #set $slip 183.129.192.242;
+               if ( $remote_addr = 183.129.192.242 ) {
+                  set $root_dir /home/front/pigray;
+	       }   
+	       if ( $http_x_forwarded_for = 183.129.192.242 ) {
+    	       	  set $root_dir /home/front/pigray;
+	       }
+	       root $root_dir; 
+               try_files $uri $uri/ @router;
+  <dependency>
+            <groupId>com.zjdex.framework</groupId>
+            <artifactId>framework-cache</artifactId>
+            <version>${framework-cache}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zjdex.framework</groupId>
+            <artifactId>framework-core</artifactId>
+            <version>${framework-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>			   
+问题：每次redis读取需要7毫秒，数据库读取也是7毫秒
+办法：提升性能，redis.topic
+问题：redis键空间通知
+办法：config set notify-keyspace-events AKE
+config get notify-keyspace-events
+redis.conf配置  notify-keyspace-events "AKE"
+问题：org.redisson.client.RedisResponseTimeoutException: Redis server response timeout (3000 ms) ， 2分钟OK
+办法：16:01 
+验证： 2->OK  5-> 10-> 15->FAIL
+        <dependency>
+            <groupId>com.zjdex.framework</groupId>
+            <artifactId>framework-gray</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>
+		需要将cache升级到1.5版本
+        <dependency>
+            <groupId>com.zjdex.framework</groupId>
+            <artifactId>framework-cache</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>		
+部署： nginx
+git application.yaml 
+ribbon:
+  client:
+    name: ${spring.application.name}
+gray:
+  enabled: true
+
+150: git@code.data4truth.com:pi/pi-it-config.git  shuli@123   http://crmtest1.jiebai.com/  183.131.202.150   10.70.15.141
+/etc/nginx/nginx.conf   
+
+  stream:
+      kafka:
+        binder:
+          brokers: 10.70.15.141,10.70.15.12,10.70.15.198
+          defaultBrokerPort: 9092
+          zkNodes: 10.70.15.141,10.70.15.12,10.70.15.198
+          defaultZkPort: 2181
+  #kafka配置
+  kafka:
+    bootstrap-servers: 10.70.15.12:9092,10.70.15.198:9092
+
+include /etc/nginx/location.conf;
+1: user经常调用intergration，办法：zuul有缓存，办法： @RibbonClients(defaultConfiguration = GrayConfig.class)
+2:  defaultRule.choose(key);为空， 同上
+3：zuul启动失败，报204错误
+DynamicServerListLoadBalancer ZoneAwareLoadBalancer   16992 21988 17352 29140
+RibbonClientConfiguration
+
+  cloud:
+    bus:
+      enabled: true
+    stream:
+      kafka:
+        binder:
+          brokers: 10.70.15.12
+          defaultBrokerPort: 9092
+          zkNodes: 10.70.15.12
+          defaultZkPort: 2181
+  #kafka配置
+  kafka:
+    bootstrap-servers: 10.70.15.12:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+num.partitions=3
+zookeeper.connect=10.70.15.141:2181,10.70.15.12:2181,10.70.15.198:2181
+
+积分补录： crm, order ,b 
+docker run --name=setting-server --privileged=true -p 31111:31111 --env SERVER_PORT=31111 -env SERVER_HOSTNAME=10.70.15.12 --env EUREKA_URL=10.70.15.141  --env EUREKA_PORT=8000 --env PROFILE=it --add-host pay.zjbdos.com:61.174.255.140 --add-host hdwhpharmt.zjbdos.com:61.174.254.204 -v /data/servers/logs/setting-server/:/data/servers/logs/setting-server -t setting-server
+
+1: integration->crm , 不是灰度IP，不是灰度用户， 调用了CRM的灰度服务
+
+/usr/sbin/nginx
+
+zookeeper-server-start.bat ./zookeeper.properties
+kafka-server-start.bat ./server.properties

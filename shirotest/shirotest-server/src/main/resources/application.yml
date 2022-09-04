@@ -1,0 +1,40 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: shirotest
+  servlet:
+    multipart:
+      enabled: true
+      maxFileSize: -1  #单个文件的最大上限
+      maxRequestSize: -1 #单个请求的文件总大小上限
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/jim?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 10
+    maxWait: 60000
+    minIdle: 5
+    maxIdle: 15
+    timeBetweenEvictionRunsMillis: 600000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    maxOpenPreparedStatements: 20
+    removeAbandoned: true
+    removeAbandonedTimeout: 300
+    logAbandoned: true
+
+mybatis-plus:
+  type-aliases-package: com.jim.shirotest.model
+  mapper-locations: classpath:mapping/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0

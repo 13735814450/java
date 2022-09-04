@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.box.dao.EmployeeDao">
+
+    <resultMap id="baseRsp" type="com.box.vo.rsp.EmployeeRsp">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseField">
+        name,hospital_id,create_at,update_at
+    </sql>
+
+    <insert id="add" parameterType="com.box.vo.req.EmployeeReq" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_employee (<include refid="baseField"/>)
+        VALUES (#{name},#{hospitalId},NOW(),NOW())
+    </insert>
+    <select id="listByHospitalId" resultMap="baseRsp">
+        SELECT id,<include refid="baseField"/>
+        FROM t_employee
+        WHERE hospital_id = ${hospitalId}
+    </select>
+
+    <select id="getById" resultMap="baseRsp">
+        SELECT id,<include refid="baseField"/>
+        FROM t_employee
+        WHERE id = ${id}
+    </select>
+</mapper>

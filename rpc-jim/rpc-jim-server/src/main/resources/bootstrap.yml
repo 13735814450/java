@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: lt-demo-rpc-server
+  main:
+      allow-bean-definition-overriding: true
+#  profiles:
+#    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.97.230.127:18848
+        group: DEFAULT_GROUP
+      user-name: nacos
+      password: nacos
+      config:
+        server-addr: 47.97.230.127:18848
+        file-extension: yml
+        group: demo
+        namespace: 7bc1f897-9d86-435d-b64a-b494abbc0c04
+        ext-config:
+          - data-id: mysql.yml
+            group: MIDDLEWARE_GROUP
+            refresh: false
+          - data-id: redis.yml
+            group: MIDDLEWARE_GROUP
+            refresh: false
+
+dubbo:
+  registry:
+    #Dubbo 服务注册中心配置，其中子属性 address 的值 “spring-cloud://localhost”，说明挂载到 Spring Cloud 注册中心
+    address: spring-cloud://localhost
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.lt.**.service.biz.impl
+  cloud:
+    #要订阅其他服务，如果没有，则填写当前服务
+    subscribed-services: ${spring.application.name}
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.lt.**.dao.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mappers/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml

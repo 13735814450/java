@@ -1,0 +1,46 @@
+Last login: Wed Jan 13 10:46:51 2021 from 192.168.31.34
+ls
+[root@node01 ~]# ls
+[0m[01;34maaa[0m                                  [01;34mclickhouse[0m
+[01;34malarm[0m                                [01;31mjdk-8u231-linux-x64.rpm[0m
+anaconda-ks.cfg                      [01;31mkafka_2.11-2.1.1.tgz[0m
+[01;31mapache.tar[0m                           [01;31mkafka_2.11-2.4.0.tgz[0m
+[34;42mapache-tomcat-8.5.55[0m                 [01;34mtomcat-8.5.55[0m
+[01;31mapache-tomcat-8.5.55.tar.gz[0m          [01;31mtomcat-8.5.55.tar.gz[0m
+[01;34mchaosblade-0.9.0[0m                     [01;31mzookeeper-3.4.6.tar.gz[0m
+[01;31mchaosblade-0.9.0-linux-amd64.tar.gz[0m
+[root@node01 ~]# Last login: Wed Jan 13 13:53:34 2021 from 192.168.31.34
+pwd
+[root@node01 ~]# pwd
+/root
+[root@node01 ~]# Last login: Wed Jan 13 13:53:34 2021 from 192.168.31.34
+ls
+[root@node01 ~]# ls
+[0m[01;34maaa[0m                                  [01;34mclickhouse[0m
+[01;34malarm[0m                                [01;31mjdk-8u231-linux-x64.rpm[0m
+anaconda-ks.cfg                      [01;31mkafka_2.11-2.1.1.tgz[0m
+[01;31mapache.tar[0m                           [01;31mkafka_2.11-2.4.0.tgz[0m
+[34;42mapache-tomcat-8.5.55[0m                 [01;34mtomcat-8.5.55[0m
+[01;31mapache-tomcat-8.5.55.tar.gz[0m          [01;31mtomcat-8.5.55.tar.gz[0m
+[01;34mchaosblade-0.9.0[0m                     [01;31mzookeeper-3.4.6.tar.gz[0m
+[01;31mchaosblade-0.9.0-linux-amd64.tar.gz[0m
+[root@node01 ~]# Last login: Wed Jan 13 13:57:20 2021 from 192.168.31.34
+pwd
+[root@node01 ~]# pwd
+/root
+[root@node01 ~]# Last login: Wed Jan 13 13:57:20 2021 from 192.168.31.34
+ls
+[root@node01 ~]# ls
+[0m[01;34maaa[0m                                  [01;34mclickhouse[0m
+[01;34malarm[0m                                [01;31mjdk-8u231-linux-x64.rpm[0m
+anaconda-ks.cfg                      [01;31mkafka_2.11-2.1.1.tgz[0m
+[01;31mapache.tar[0m                           [01;31mkafka_2.11-2.4.0.tgz[0m
+[34;42mapache-tomcat-8.5.55[0m                 [01;34mtomcat-8.5.55[0m
+[01;31mapache-tomcat-8.5.55.tar.gz[0m          [01;31mtomcat-8.5.55.tar.gz[0m
+[01;34mchaosblade-0.9.0[0m                     [01;31mzookeeper-3.4.6.tar.gz[0m
+[01;31mchaosblade-0.9.0-linux-amd64.tar.gz[0m
+[root@node01 ~]# Last login: Wed Jan 13 14:01:45 2021 from 192.168.31.34
+pwd
+[root@node01 ~]# pwd
+/root
+[root@node01 ~]# 

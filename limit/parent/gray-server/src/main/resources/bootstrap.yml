@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: gray-server
+  profile: ${PROFILE}
+  cloud:
+    config:
+      profile: ${spring.profile}
+      discovery:
+        enabled: true
+        serviceId: config-server
+      name: ${spring.application.name}
+      label: master
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: ${SERVER_HOSTNAME}
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_URL}:${EUREKA_PORT}/eureka/
+
+#spring:
+#  application:
+#    name: gray-server
+#  profile: dev
+#  cloud:
+#    config:
+#      profile: ${spring.profile}
+#      discovery:
+#        enabled: true
+#        serviceId: config-server
+#      name: ${spring.application.name}
+#      label: master
+#server:
+#  port: 8001
+#eureka:
+#  instance:
+#    hostname: 192.168.1.172
+#    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:8000/eureka/
+

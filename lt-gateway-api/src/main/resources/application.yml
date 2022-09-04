@@ -1,0 +1,7 @@
+logging:
+  config: classpath:logback.xml
+  level:
+    com.alibaba: warn
+    org.apache.dubbo: warn
+    springfox.documentation.spring: warn
+    org.springframework.context.support: warn
